@@ -14,12 +14,14 @@ namespace CompanyContactsHub.Data
             optionsBuilder.UseSqlServer(_connectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Contact>()
-                .HasOne(c => c.Company)
-                .WithMany(cy => cy.Contacts)
+        { 
+            modelBuilder.Entity<Company>()
+                .HasMany(c=>c.Contacts)
+                .WithOne(ct=>ct.Company)
+                .IsRequired()
                 .HasForeignKey(c => c.CompanyId)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Contact> Contacts { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace CompanyContactsHub.Data
+﻿using System.Text.Json.Serialization;
+
+namespace CompanyContactsHub.Data
 {
     public class Contact
     {
@@ -8,6 +10,8 @@
         public string Role { get; set; }
 
         public int CompanyId { get; set; }
+
+        [JsonIgnore]
         public Company Company { get; set; }
     }
 }
